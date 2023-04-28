@@ -11,6 +11,9 @@
   "keywords": [
 
   ],
+  "engines": {
+    "node": "18.x"
+  },
   "author": "SrRapero720",
   "license": "All rights reserved",
   "description": "",
