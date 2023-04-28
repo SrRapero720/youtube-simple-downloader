@@ -14,7 +14,7 @@ app.enable("verbose errors");
 console.send("Iniciando servidor");
 
 app.get("/", (req, res) => {
-    res.status(200).sendFile(join(__dirname, "/html/index.html"));
+    res.status(200).sendFile(join(process.cwd(), "/views/index.html"));
 })
 
 app.get("/execute/:ytid", (req, res) => {
