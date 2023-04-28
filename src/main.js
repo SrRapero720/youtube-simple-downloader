@@ -25,7 +25,6 @@ app.get("/execute/:ytid", (req, res) => {
     try {
         res.header('Content-Disposition', `attachment; filename="${url}.mp4"`);
         res.header("Content-Type", "video/mp4")
-        res.header("", "");
         ytdl(url, { filter: (format) => format.container == "mp4" && format.hasVideo && format.hasAudio,  }).pipe(res);
     } catch(e) {
         res.status(500).json(new Res(500, "Failed to load url " + url));
