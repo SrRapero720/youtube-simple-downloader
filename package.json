@@ -1,0 +1,18 @@
+{
+  "name": "youtube-simple-downloader",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "type": "commonjs",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "express": "^4.18.2",
+    "sr-console": "^1.1.7",
+    "ytdl-core": "https://github.com/khlevon/node-ytdl-core/archive/refs/tags/v4.11.4-patch.1.tar.gz"
+  }
+}
