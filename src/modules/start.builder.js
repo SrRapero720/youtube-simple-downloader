@@ -1,6 +1,6 @@
-const net = require("net");
+import net from "net";
 
-module.exports = class StartBuilder extends String {
+export default class StartBuilder extends String {
     static DEFAULT_MESSAGE_FULL = 
 `==== SERVIDOR INICIADO ====
     HOSTNAME: %host%

@@ -1,20 +1,20 @@
-require("sr-console")
-const express = require("express");
-const StartBuilder = require("./extras/start.builder.js");
-const Res = require("./extras/res.js");
-const ytdl = require("ytdl-core");
-const path  = require("path");
+import "sr-console";
+import express, { json, urlencoded, text } from "express";
+import StartBuilder from "./modules/start.builder.js";
+import Res from "./modules/res.js";
+import ytdl from "ytdl-core";
+import { join } from "path";
 
 const app = express();
-app.use(express.json({ limit: "100mb" }));
-app.use(express.urlencoded({ extended: true, limit: "50mb" }));
-app.use(express.text({ limit: "8mb" }));
+app.use(json({ limit: "100mb" }));
+app.use(urlencoded({ extended: true, limit: "50mb" }));
+app.use(text({ limit: "8mb" }));
 app.enable("verbose errors");
 
 console.send("Iniciando servidor");
 
 app.get("/", (req, res) => {
-    res.status(200).send(path.join(__dirname, "/html/index.html"));
+    res.status(200).sendFile(join(__dirname, "/html/index.html"));
 })
 
 app.get("/execute/:ytid", (req, res) => {
@@ -29,6 +29,8 @@ app.get("/execute/:ytid", (req, res) => {
         res.status(500).json(new Res(500, "Failed to load url " + url));
     }
 });
+
+
 console.warn("Ruta principal agregada");
 
 

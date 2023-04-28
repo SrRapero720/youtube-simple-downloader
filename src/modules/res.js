@@ -1,4 +1,4 @@
-module.exports = class ResponseModel {
+export default class ResponseModel {
     status;
     message;
     content;
