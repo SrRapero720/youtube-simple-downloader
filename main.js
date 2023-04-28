@@ -25,7 +25,7 @@ app.get("/:ytid", (req, res) => {
 });
 console.warn("Ruta principal agregada");
 
-const net = app.listen(process.env.PORT ?? 3000, () => {
+const net = app.listen(process.env.PORT || 80, () => {
     console.success(new StartBuilder(net.address()).toString());
     console.success("Completado")
 });
