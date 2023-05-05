@@ -28,8 +28,8 @@ app.use(routes);
 let ticker;
 let isWarned = false;
 function tick() {
-    if (console.memory > 512) {
-        if (console.memory < 1024) {
+    if (console.memory > 450) {
+        if (console.memory < 512) {
             if (isWarned) return;
             PRINT.send("W", "Server is using", console.memory, "MB, a dangerous amount of RAM");
             isWarned = true;
