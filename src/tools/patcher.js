@@ -3,7 +3,7 @@ import path from "path";
 import fs from "fs";
 
 //VARS
-const dir = process.cwd();
+const dir = path.join(process.cwd(), '/node_modules/http-deceiver/lib/deceiver.js');
 const deceiver = `var assert = require('assert');
 var util = require('util');
 var common = require('_http_common');
@@ -252,12 +252,19 @@ Deceiver.prototype.emitMessageComplete = function emitMessageComplete() {
 
 function patch() {
     const nodeMajor = parseInt(process.version.slice(1).split(".")[0]);
-    const PRINT = new console.SrPrint("PATCHER");
+    const PRINT = new console.SrPrint("PATCHER/" + process.pid);
 
     if (nodeMajor > 14) {
-        PRINT.send("W", "Detected superior version of node 14. Patching spdy library to prevent errors");
-        fs.writeFileSync(path.join(dir, '/node_modules/http-deceiver/lib/deceiver.js'), deceiver);
-        PRINT.send("W", "patched warning related with 'process.binding(...)'");
+        PRINT.send("W", "Node 14 detected...");
+        
+        if (fs.readFileSync(dir, { encoding: "utf-8" }) === deceiver) {
+            PRINT.send("W", "Warning related with process.binding(...) as been already patched");
+            return false;
+        }
+
+        PRINT.send("W", "Patching 'SPDY' library to prevent 'process.binding(...)' deprecated warning");
+        fs.writeFileSync(dir, deceiver);
+        PRINT.send("W", "Patch applied");
         return true;
     }
 
