@@ -8,9 +8,7 @@
     "start": "node src/main.js"
   },
   "type": "module",
-  "keywords": [
-
-  ],
+  "keywords": [],
   "engines": {
     "node": "18.x"
   },
@@ -19,7 +17,11 @@
   "description": "",
   "dependencies": {
     "express": "^4.18.2",
+    "spdy": "^4.0.2",
     "sr-console": "^1.1.7",
     "ytdl-core": "https://github.com/khlevon/node-ytdl-core/archive/refs/tags/v4.11.4-patch.1.tar.gz"
+  },
+  "devDependencies": {
+    "@types/spdy": "^3.4.5"
   }
 }
