@@ -4,7 +4,7 @@ import ytdl from "ytdl-core";
 import path from "path";
 
 const app = Router();
-const PRINT = console.defaultPrint;
+const PRINT = new console.SrPrint("SYSTEM/" + process.pid);
 
 app.get("/", (req, res) => res.sendFile(path.join(process.cwd(), "static/views/index.html")));
 
