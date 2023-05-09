@@ -27,12 +27,15 @@ app.use(routes);
 // TICKER
 let ticker;
 let isWarned = false;
+let tpm = 0;
 function tick() {
+    tpm++;
     if (console.memory > 256) {
         if (console.memory < 320) {
-            if (isWarned) return;
+            if (isWarned && tpm < 300) return;
             PRINT.send("W", "Server is using", console.memory, "MB, a dangerous amount of RAM");
             isWarned = true;
+            tpm = 0;
         } else {
             PRINT.send("E", "Server is using a critical amount of RAM... FORCING AUTO-RESTART");
             server.closeAllConnections();
