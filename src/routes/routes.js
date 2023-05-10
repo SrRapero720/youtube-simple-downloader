@@ -21,6 +21,10 @@ app.get("/execute/:ytid", (req, res) => {
         const yt = ytdl(url, { filter: (format) => format.hasVideo && format.hasAudio && format.container === "mp4", quality: "highest",  });
         
         yt.pipe(res);
+        res.on("close", () => {
+            yt.unpipe();
+            yt.destroy();
+        })
     } catch(e) { res.status(500).json(new Res(500, "Failed to load url " + url)); }
 });
 

@@ -16,43 +16,14 @@ server.addListener("error", err => PRINT.send("E", err));
 PRINT.send("L", "Preparing worker with PID", process.pid);
 
 app.set("trust proxy", ['loopback', 'linklocal', 'uniquelocal']);
-// app.use(express.json({ limit: "100mb" }));
-// app.use(express.urlencoded({ extended: true, limit: "50mb" }));
-// app.use(express.text({ limit: "8mb" }));
 app.use("/", express.static(join(process.cwd(), "/static/public")));
 
 // ROUTES
 app.use(routes);
 
-// TICKER
-let ticker;
-let isWarned = false;
-let tpm = 0;
-function tick() {
-    tpm++;
-    if (console.memory > 256) {
-        if (console.memory < 320) {
-            if (isWarned && tpm < 300) return;
-            PRINT.send("W", "Server is using", console.memory, "MB, a dangerous amount of RAM");
-            isWarned = true;
-            tpm = 0;
-        } else {
-            PRINT.send("E", "Server is using a critical amount of RAM... FORCING AUTO-RESTART");
-            server.closeAllConnections();
-            server.closeIdleConnections();
-            server.close();
-            clearInterval(ticker);
-            run();
-        }
-    }
-}
-
 function run() {
     server.listen(process.env.PORT || 80, () => {
-        ticker = setInterval(() => tick(), 1000);
-        PRINT.send("I", "Server ticker is ticking");
-        
-        const addr = server.address()
+        const addr = server.address();
         PRINT.send("S", new StartBuilder(addr).toString());
     });
 }
@@ -60,3 +31,4 @@ function run() {
 // START
 run();
 setInterval(() => PRINT.send("D", "Memory used:", console.memory.toString().concat("MB")), 1000 * 60 * 60);
+setInterval(() => process.send("memory:" + console.memory), 1000);
