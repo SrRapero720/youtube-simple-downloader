@@ -30,5 +30,5 @@ function run() {
 
 // START
 run();
-setInterval(() => PRINT.send("D", "Memory used:", console.memory.toString().concat("MB")), 1000 * 60 * 60);
+setInterval(() => PRINT.send("I", "Memory used:", console.memory.toString().concat("MB")), 1000 * 60 * 60);
 setInterval(() => process.send("memory:" + console.memory), 1000);

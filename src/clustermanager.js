@@ -69,7 +69,7 @@ export default class ClusterManager {
             let mem = 0;
             tpm++;
             forks.forEach(f => mem = mem + f.memory);
-            PRINT.send("D", mem);
+            // PRINT.send("D", mem);
 
             if (mem > warnMem) {
                 if (mem < maxMem) {
