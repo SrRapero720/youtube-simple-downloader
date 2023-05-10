@@ -88,8 +88,6 @@ export default class ClusterManager {
                     }
                 }
             }
-
-
         }, 1000);
     }
 
@@ -99,9 +97,6 @@ export default class ClusterManager {
         fork.on("message", (msg) => {
             if (msg.includes("memory")) fork.memory = parseFloat(msg.split(":")[1]);
         });
-    
-
-
         forks.push(fork);
         this.__created++;
     }
